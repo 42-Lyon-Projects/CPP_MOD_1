@@ -5,12 +5,14 @@
 	class Zombie
 	{
 		private:
-			std::string name;
+		std::string name;
 		public:
 			Zombie(const std::string name);
+			Zombie();
 			~Zombie();
 			void announce() const;
+			void setName(std::string name);
 	};
-	Zombie* newZombie(const std::string name);
-	void randomChump(const std::string name);
+	Zombie* zombieHorde(int N, std::string name);
+
 #endif

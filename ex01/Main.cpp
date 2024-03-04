@@ -2,11 +2,11 @@
 
 int main()
 {
-	randomChump("John");
-	const Zombie *zombie = newZombie("Lennon");
-	if (!zombie)
-		return (1);
-	zombie->announce();
-	delete zombie;
+	Zombie* zombies = zombieHorde(10, "BOB");
+	for (int i = 0; i < 10; ++i)
+	{
+		zombies[i].announce();
+	}
+	delete [] zombies;
 	return (0);
 }

@@ -1,15 +1,12 @@
-NAME = PhoneBook
+NAME = ZombieHorde
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = @rm -rf
 CC = @c++
 DIR = @mkdir -p
 PRINT = @echo
-FILES = Utils/StringUtils				\
-		Models/ContactModel				\
-		Models/PhoneBookModel			\
-		Controllers/PhoneBookController	\
-		Views/PhoneBookView				\
-		Main							\
+FILES = Main		\
+		Zombie		\
+		ZombieHorde	\
 
 OBJS = $(addsuffix .o, $(addprefix .Objects/, $(FILES)))
 
