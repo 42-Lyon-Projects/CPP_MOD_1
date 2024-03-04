@@ -1,13 +1,12 @@
-NAME = zombie
+NAME = GUUNNZ
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = @rm -rf
 CC = @c++
 DIR = @mkdir -p
 PRINT = @echo
-FILES =	Main		\
-		Zombie		\
-		NewZombie	\
-		RandomChump	\
+FILES = Weapon	\
+		HumanA	\
+		main	\
 
 OBJS = $(addsuffix .o, $(addprefix .Objects/, $(FILES)))
 
@@ -33,7 +32,7 @@ fclean:
 	$(RM) $(OBJS)
 	$(PRINT) "Deleting Objects directory..."
 	$(RM) .Objects
-	$(PRINT) "Deleting executable $(NAME)..."
+	$(PRINT) "Deleting $(NAME)..."
 	$(RM) $(NAME)
 	$(PRINT) "Objects cleaned."
 	$(PRINT) "Objects directory deleted."

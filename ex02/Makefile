@@ -13,7 +13,7 @@ $(NAME): $(OBJS)
 	$(PRINT) "$(NAME) done."
 
 .Objects/%.o: ./%.cpp Makefile $(HEADER)
-	$(DIR) .Objects/Models .Objects/Controllers .Objects/Views .Objects/Utils
+	$(DIR) .Objects
 	$(PRINT) "Compiling $<$(_END)..."
 	$(CC) -c $(CFLAGS) $< -o $@
 
@@ -37,4 +37,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re $(NAME)
