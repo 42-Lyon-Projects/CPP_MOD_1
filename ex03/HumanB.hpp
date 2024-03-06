@@ -1,5 +1,5 @@
-#ifndef HUMANA_HPP
-#define HUMANA_HPP
+#ifndef HUMANB_HPP
+#define HUMANB_HPP
 
 	#include <string>
 	#include "Weapon.hpp"
@@ -7,9 +7,10 @@
 	{
 		private:
 			std::string name;
-			Weapon weapon;
+			Weapon* weapon;
 		public:
-			Human(const std::string name);
+			explicit HumanB(const std::string& name);
+			void setWeapon(Weapon& weapon);
 			Weapon getWeapon();
 			std::string getName();
 			void attack();

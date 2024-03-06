@@ -1,11 +1,12 @@
-NAME = GUUNNZ
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+NAME = HUMANS
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 RM = @rm -rf
 CC = @c++
 DIR = @mkdir -p
 PRINT = @echo
 FILES = Weapon	\
 		HumanA	\
+		HumanB	\
 		main	\
 
 OBJS = $(addsuffix .o, $(addprefix .Objects/, $(FILES)))

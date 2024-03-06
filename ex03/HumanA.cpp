@@ -1,13 +1,18 @@
 #include "HumanA.hpp"
 
 #include <iostream>
-#include "HumanA.hpp"
 
 
-HumanA::HumanA(const std::string &name, const Weapon &weapon) : name(name), weapon(weapon){};
+HumanA::HumanA(const std::string &name, Weapon& weapon) : name(name), weapon(weapon){};
 
+std::string HumanA::getName() {
+	return this->name;
+}
 
+Weapon HumanA::getWeapon() {
+	return this->weapon;
+}
 
 void HumanA::attack() {
-	std::cout << this->getName() << " attacks with their " << this->getWeapon().getType();
+	std::cout << this->getName() << " attacks with their " << this->getWeapon().getType() << std::endl;
 }
