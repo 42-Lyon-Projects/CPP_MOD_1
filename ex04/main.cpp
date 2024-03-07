@@ -1,6 +1,5 @@
-
-#include "FileUtils.hpp"
 #include <iostream>
+#include "FileUtils.hpp"
 
 int main(int argc, char **argv)
 {

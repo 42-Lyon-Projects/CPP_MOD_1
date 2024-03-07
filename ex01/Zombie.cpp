@@ -1,7 +1,3 @@
-//
-// Created by jimmy on 03/03/24.
-//
-
 #include "Zombie.hpp"
 
 Zombie::Zombie() {};
