@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 	}
 
 	std::string filename = argv[1];
-	std::string StringToReplace = argv[2];
+	std::string stringToReplace = argv[2];
 	std::string replacedBy = argv[3];
 
 	if (FileUtils::isDirectory(filename))
@@ -28,14 +28,35 @@ int main(int argc, char **argv)
 	const size_t linesCount = FileUtils::countLines(readFileFlux);
 	std::string* lines = new std::string[linesCount];
 
-	readFileFlux.seekg(0, std::ios::beg);
-	readFileFlux.clear();
-
-
 	FileUtils::readFromFile(readFileFlux, lines);
-	std::cout << "First string: " << lines[0] << std::endl;
-
 	readFileFlux.close();
+
+	for (size_t i = 0; i < linesCount; i++)
+	{
+		size_t pos = lines[i].find(stringToReplace);
+		if(pos != std::string::npos) {
+			try
+			{
+				lines[i].erase(pos, stringToReplace.length());
+				try
+				{
+					lines[i].insert(pos, replacedBy);
+				}
+				catch(const std::out_of_range& e)
+				{
+					std::cerr << "Exit, an error occured when new string is inserted: \n";
+					std::cerr << e.what() << '\n';
+					return 1;
+				}
+			}
+			catch(const std::out_of_range& e)
+			{
+				std::cerr << "Exit, an error occured when the old string is erased: \n";
+				std::cerr << e.what() << '\n';
+				return 1;
+			}
+		}
+	}
 
 	std::ofstream writeFileFlux(filename.append(".replace").c_str(), std::ios::trunc);
 	if (!writeFileFlux.is_open())

@@ -7,7 +7,6 @@ PRINT = @echo
 FILES = main		\
 		FileUtils	\
 
-
 OBJS = $(addsuffix .o, $(addprefix .Objects/, $(FILES)))
 
 $(NAME): $(OBJS)

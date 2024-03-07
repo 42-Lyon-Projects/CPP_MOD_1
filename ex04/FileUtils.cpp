@@ -1,9 +1,8 @@
 #include "FileUtils.hpp"
 
 #include <fstream>
-#include <sys/stat.h>
 #include <iostream>
-
+#include <sys/stat.h>
 
 bool FileUtils::fileExists(std::string filename)
 {
@@ -35,7 +34,8 @@ size_t FileUtils::countLines(std::ifstream& fileFlux)
 {
 	size_t count = 0;
 	std::string line;
-	while(std::getline(fileFlux, line))
+	fileFlux.seekg(0, std::ios::beg);
+	while((!fileFlux.eof()) && std::getline(fileFlux, line))
 		count++;
 	return count;
 }
@@ -43,7 +43,9 @@ size_t FileUtils::countLines(std::ifstream& fileFlux)
 void FileUtils::readFromFile(std::ifstream& fileFlux, std::string lines[])
 {
 	size_t i = 0;
-	while(std::getline(fileFlux, lines[i++]))
+
+	fileFlux.seekg(0, std::ios::beg);
+	while(!fileFlux.eof() && std::getline(fileFlux, lines[i++]))
 		;
 }
 
@@ -51,13 +53,14 @@ void FileUtils::writeToFile(std::ofstream& fileFlux, std::string lines[])
 {
 
 	size_t i = 0;
-	while(!lines[i].empty())
+	while(lines[i].c_str())
 		fileFlux << lines[i++] << std::endl;
 }
 
 void FileUtils::printFile(std::ifstream&  fileFlux)
 {
 	std::string line;
-	while(std::getline(fileFlux, line))
+	fileFlux.seekg(0, std::ios::beg);
+	while((!fileFlux.eof()) && std::getline(fileFlux, line))
 		std::cout << line;
 }
