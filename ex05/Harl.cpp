@@ -34,7 +34,7 @@ void Harl::debug()
 
 void Harl::info()
 {
-	std::cout << "Hello form the information" << std::endl;
+	std::cout << "Hello from the information" << std::endl;
 }
 
 void Harl::warning()
