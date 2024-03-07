@@ -42,7 +42,7 @@ void Harl::info()
 
 void Harl::warning()
 {
-	std::cerr << "[ WARNING ]Hello this is a Warning message\n";
+	std::cerr << "[ WARNING ] Hello this is a Warning message\n";
 }
 
 void Harl::error()
