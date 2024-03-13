@@ -24,7 +24,7 @@ void Harl::complain(std::string level)
 			return;
 		}
 	}
-	std::cerr << "Error: " << level << " is not a valid level\n";
+	std::cout << "Error: " << level << " is not a valid level" << std::endl;
 }
 
 void Harl::debug()
@@ -39,10 +39,10 @@ void Harl::info()
 
 void Harl::warning()
 {
-	std::cerr << "Hello this is a Warning message\n";
+	std::cout << "Hello this is a Warning message" << std::endl;
 }
 
 void Harl::error()
 {
-	std::cerr << "[ERROR] >> Hello this in an error\n";
+	std::cout << "[ERROR] >> Hello this in an error" << std::endl
 }

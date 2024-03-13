@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 4)
 	{
-		std::cerr << "Usage: <filename> <string_to_replace> <replaced_by> ! \n";
+		std::cout << "Usage: <filename> <string_to_replace> <replaced_by> ! " << std::endl;
 		return 1;
 	}
 
@@ -14,15 +14,13 @@ int main(int argc, char **argv)
 	std::string replacedBy = argv[3];
 
 	if (FileUtils::isDirectory(filename))
-		return (std::cerr << "Error: " << filename << " is a directory\n", 1);
-	if (!FileUtils::isSymbolicLink(filename))
-		return (std::cerr << "Error: " << filename << " is a symbolic link\n", 1);
+		return (std::cout << "Error: " << filename << " is a directory" << std::endl, 1);
 	if (!FileUtils::fileExists(filename))
-		return (std::cerr << "Error: " << filename << " does not exist\n", 1);
+		return (std::cout << "Error: " << filename << " file does not exist" << std::endl, 1);
 
 	std::ifstream readFileFlux(filename.c_str());
 	if (!readFileFlux.is_open())
-		return (std::cerr << "Error: " << filename << " could not be opened\n", 1);
+		return (std::cout << "Error: " << filename << " could not be opened" << std::endl, 1);
 
 	const size_t linesCount = FileUtils::countLines(readFileFlux);
 	std::string* lines = new std::string[linesCount];
@@ -43,15 +41,15 @@ int main(int argc, char **argv)
 				}
 				catch(const std::out_of_range& e)
 				{
-					std::cerr << "Exit, an error occured when new string is inserted: \n";
-					std::cerr << e.what() << '\n';
+					std::cout << "Exit, an error occured when new string is inserted: " << std::endl;
+					std::cout << e.what() << std::endl;
 					return 1;
 				}
 			}
 			catch(const std::out_of_range& e)
 			{
-				std::cerr << "Exit, an error occured when the old string is erased: \n";
-				std::cerr << e.what() << '\n';
+				std::cout << "Exit, an error occured when the old string is erased: " << std::endl;
+				std::cout << e.what() << std::endl;
 				return 1;
 			}
 		}
@@ -59,7 +57,7 @@ int main(int argc, char **argv)
 
 	std::ofstream writeFileFlux(filename.append(".replace").c_str(), std::ios::trunc);
 	if (!writeFileFlux.is_open())
-		return (std::cerr << "Error: " << filename << " could not be opened\n", 1);
+		return (std::cout << "Error: " << filename << " could not be opened" << std::endl, 1);
 
 	FileUtils::writeToFile(writeFileFlux, lines);
 	writeFileFlux.close();

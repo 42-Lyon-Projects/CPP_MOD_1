@@ -27,7 +27,7 @@ int Harl::getIntegerLevel(std::string level)
 		if (this->names[i] == level)
 			return i;
 	}
-	throw std::invalid_argument("Error: " + level + " is not a valid level\n");
+	throw std::invalid_argument("Error: " + level + " is not a valid level");
 }
 
 void Harl::debug()
@@ -42,10 +42,10 @@ void Harl::info()
 
 void Harl::warning()
 {
-	std::cerr << "[ WARNING ] Hello this is a Warning message\n";
+	std::cout << "[ WARNING ] Hello this is a Warning message" << std::cout;
 }
 
 void Harl::error()
 {
-	std::cerr << "[ ERROR ] >> Hello this in an error\n";
+	std::cout << "[ ERROR ] >> Hello this in an error" << std::cout;
 }

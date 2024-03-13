@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cerr << "Usage: <level> ! \n";
+		std::cout << "Usage: <level> !" << std::endl;
 		return 1;
 	}
 

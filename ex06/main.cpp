@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cerr << "Usage: <level> ! \n";
+		std::cout << "Usage: <level> !" << std::endl;
 		return 1;
 	}
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	}
 	catch (std::invalid_argument &e)
 	{
-		std::cerr << e.what();
+		std::cout << e.what() << std::endl;
 		return 1;
 	}
 	return 0;
