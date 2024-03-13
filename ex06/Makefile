@@ -1,21 +1,22 @@
-NAME = harlFilter
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
+NAME = HARL-FILTER
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -MD
 RM = @rm -rf
 CC = @c++
 DIR = @mkdir -p
 PRINT = @echo
-FILES = main		\
-		Harl		\
+FILES = Harl		\
 		StringUtils	\
+		main		\
 
 OBJS = $(addsuffix .o, $(addprefix .Objects/, $(FILES)))
+DPDS = $(addsuffix .d, $(addprefix .Objects/, $(FILES)))
 
 $(NAME): $(OBJS)
 	$(PRINT) "Making $(NAME)..."
 	$(CC) $(OBJS) -o $(NAME)
 	$(PRINT) "$(NAME) done."
 
-.Objects/%.o: ./%.cpp Makefile $(HEADER)
+.Objects/%.o: ./%.cpp Makefile
 	$(DIR) .Objects
 	$(PRINT) "Compiling $<$(_END)..."
 	$(CC) -c $(CFLAGS) $< -o $@
@@ -40,4 +41,6 @@ fclean:
 
 re: fclean all
 
-.PHONY: all clean fclean re $(NAME)
+.PHONY: all clean fclean re
+
+-include $(OBJS:.o=.d)

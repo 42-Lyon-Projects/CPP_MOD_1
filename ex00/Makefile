@@ -1,22 +1,23 @@
-NAME = zombie
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+NAME = ZOMBIE
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -MD
 RM = @rm -rf
 CC = @c++
 DIR = @mkdir -p
 PRINT = @echo
-FILES =	Main		\
+FILES = newZombie	\
+		randomChump	\
 		Zombie		\
-		NewZombie	\
-		RandomChump	\
+		main		\
 
 OBJS = $(addsuffix .o, $(addprefix .Objects/, $(FILES)))
+DPDS = $(addsuffix .d, $(addprefix .Objects/, $(FILES)))
 
 $(NAME): $(OBJS)
 	$(PRINT) "Making $(NAME)..."
 	$(CC) $(OBJS) -o $(NAME)
 	$(PRINT) "$(NAME) done."
 
-.Objects/%.o: ./%.cpp Makefile $(HEADER)
+.Objects/%.o: ./%.cpp Makefile
 	$(DIR) .Objects
 	$(PRINT) "Compiling $<$(_END)..."
 	$(CC) -c $(CFLAGS) $< -o $@
@@ -33,7 +34,7 @@ fclean:
 	$(RM) $(OBJS)
 	$(PRINT) "Deleting Objects directory..."
 	$(RM) .Objects
-	$(PRINT) "Deleting executable $(NAME)..."
+	$(PRINT) "Deleting $(NAME)..."
 	$(RM) $(NAME)
 	$(PRINT) "Objects cleaned."
 	$(PRINT) "Objects directory deleted."
@@ -41,4 +42,6 @@ fclean:
 
 re: fclean all
 
-.PHONY: all clean fclean re $(NAME)
+.PHONY: all clean fclean re
+
+-include $(OBJS:.o=.d)
