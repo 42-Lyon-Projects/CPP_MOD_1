@@ -44,5 +44,5 @@ void Harl::warning()
 
 void Harl::error()
 {
-	std::cout << "[ERROR] >> Hello this in an error" << std::endl
+	std::cout << "[ERROR] >> Hello this in an error" << std::endl;
 }
