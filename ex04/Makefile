@@ -5,6 +5,7 @@ CC = @c++
 DIR = @mkdir -p
 PRINT = @echo
 FILES = FileUtils	\
+		StringUtils	\
 		main		\
 
 OBJS = $(addsuffix .o, $(addprefix .Objects/, $(FILES)))

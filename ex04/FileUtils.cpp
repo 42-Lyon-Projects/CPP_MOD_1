@@ -15,7 +15,7 @@ bool FileUtils::fileExists(std::string filename)
 bool FileUtils::isDirectory(std::string filename)
 {
 	struct stat buff = {};
-	if(stat(filename.c_str(), &buff) == 0)
+	if (stat(filename.c_str(), &buff) == 0)
 		return buff.st_mode & S_IFDIR;
 	// If stat fails, assume it's not a directory
 	return false;
@@ -24,43 +24,55 @@ bool FileUtils::isDirectory(std::string filename)
 bool FileUtils::isSymbolicLink(std::string filename)
 {
 	struct stat buff = {};
-	if(stat(filename.c_str(), &buff) == 0)
+	if (stat(filename.c_str(), &buff) == 0)
 		return (buff.st_mode & S_IFLNK);
 	// If stat fails, assume it's not a symbolic link
 	return false;
 }
 
-size_t FileUtils::countLines(std::ifstream& fileFlux)
+size_t FileUtils::countLines(std::ifstream &fileFlux)
 {
 	size_t count = 0;
 	std::string line;
-	fileFlux.seekg(0, std::ios::beg);
-	while((!fileFlux.eof()) && std::getline(fileFlux, line))
+	while (!fileFlux.eof()) {
 		count++;
+		if (!std::getline(fileFlux, line))
+			break;
+	}
+	resetIfStream(fileFlux);
 	return count;
 }
 
-void FileUtils::readFromFile(std::ifstream& fileFlux, std::string lines[])
-{
-	size_t i = 0;
-
-	fileFlux.seekg(0, std::ios::beg);
-	while(!fileFlux.eof() && std::getline(fileFlux, lines[i++]))
-		;
-}
-
-void FileUtils::writeToFile(std::ofstream& fileFlux, std::string lines[])
+void FileUtils::readFromFile(std::ifstream &fileFlux, std::string lines[], size_t linesToRead = 0)
 {
 
-	size_t i = 0;
-	while(lines[i].c_str())
-		fileFlux << lines[i++] << std::endl;
+	for (std::size_t j = 0; j < linesToRead; ++j) {
+		std::getline(fileFlux, lines[j]);
+	}
+	resetIfStream(fileFlux);
 }
 
-void FileUtils::printFile(std::ifstream&  fileFlux)
+void FileUtils::writeToFile(std::ofstream &fileFlux, std::string lines[], size_t linesToWrite = 0)
+{
+
+	size_t i = 0;
+	while (i < linesToWrite && lines[i].c_str()) {
+		fileFlux << lines[i++];
+		if (i < linesToWrite)
+			fileFlux << std::endl;
+	}
+}
+
+void FileUtils::printFile(std::ifstream &fileFlux)
 {
 	std::string line;
+	while ((!fileFlux.eof()) && std::getline(fileFlux, line))
+		std::cout << line << std::endl;
+	resetIfStream(fileFlux);
+}
+
+void FileUtils::resetIfStream(std::ifstream &fileFlux)
+{
+	fileFlux.clear();
 	fileFlux.seekg(0, std::ios::beg);
-	while((!fileFlux.eof()) && std::getline(fileFlux, line))
-		std::cout << line;
 }
